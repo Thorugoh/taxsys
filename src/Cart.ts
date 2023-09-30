@@ -1,14 +1,11 @@
 import { Product } from "./Product";
-import { TaxFactory } from "./TaxFactory";
 
 export class Cart {
   items: Array<Product>;
   totalItems: number;
   taxes: number;
-  taxFactory: TaxFactory;
 
-  constructor(taxFactory: TaxFactory, items?: Array<Product>) {
-    this.taxFactory = taxFactory;
+  constructor(items?: Array<Product>) {
     this.items = items || [];
     this.totalItems = items?.length || 0;
     this.taxes = 0;
@@ -20,7 +17,6 @@ export class Cart {
 
   getTotal() {
     const total = this.items.reduce((a: number, b: Product) => a + b.price, 0);
-    this.taxes = this.taxFactory.calculateTax(total);
-    return total + this.taxes;
+    return total;
   }
 }

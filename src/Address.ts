@@ -1,11 +1,11 @@
 export class Address  {
-  country: String;
-  state: String;
-  city: String;
-  neighborhood: String;
+  country: string;
+  state: string;
+  city: string;
+  neighborhood: string;
   number: number;
 
-  constructor( country: String, state: String, city: String, neighborhood: String, number: number) {
+  constructor(country: string, state: string, city: string, neighborhood: string, number: number) {
     this.country = country;
     this.state = state;
     this.city = city;

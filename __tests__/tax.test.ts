@@ -1,15 +1,28 @@
 import { expect, test, describe } from "bun:test";
-import { Tax2022 } from "../src/Tax2022";
-import { Tax2023 } from "../src/Tax2023";
+import { TaxFactory2022 } from "../src/factories/TaxFactory2022";
+import { CaliforniaTax } from "../src/state/California";
+import { TexasTax } from "../src/state/Texas";
+import { TaxFactory2023 } from "../src/factories/TaxFactory2023";
 
-describe('Tax calculation', () => {
-  test('Tax for 2022 should be 20%', () => {
-    const tax2022 = new Tax2022();
-    expect(tax2022.calculateTax(100)).toBe(25);
+
+describe("TaxFactory", () => {
+  test("should create appropriate state tax for 2022", () => {
+    const factory = new TaxFactory2022();
+
+    const californiaTax = factory.createStateTax("California");
+    expect(californiaTax).toBeInstanceOf(CaliforniaTax);
+
+    const texasTax = factory.createStateTax("Texas");
+    expect(texasTax).toBeInstanceOf(TexasTax);
   });
 
-  test('Tax for 2023 should be 25%', () => {
-    const tax2023 = new Tax2023();
-    expect(tax2023.calculateTax(100)).toBe(20);
+  test("should create appropriate state tax for 2023", () => {
+    const factory = new TaxFactory2023();
+
+    const californiaTax = factory.createStateTax("California");
+    expect(californiaTax).toBeInstanceOf(CaliforniaTax);
+
+    const texasTax = factory.createStateTax("Texas");
+    expect(texasTax).toBeInstanceOf(TexasTax);
   });
 });

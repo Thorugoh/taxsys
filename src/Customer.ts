@@ -1,14 +1,14 @@
 import { Address } from "./Address";
 
 export class Customer {
-  id: String;
-  name: String;
+  id: string;
+  name: string;
   age: number;
   address: Address;
-  phone: String;
+  phone: string;
   ssn: number;
 
-  constructor(name: String, age: number, address: Address, phone: String, ssn: number) {
+  constructor(name: string, age: number, address: Address, phone: string, ssn: number) {
     this.id = 'foo-id';
     this.name = name;
     this.age = age;
