@@ -20,7 +20,7 @@ describe("Order", () => {
   });
 
   test("should calculate the final price based on state tax", () => {
-    const order = new Order(cart, customer, address, new Date(), taxFactory);
+    const order = new Order(cart, customer, address, new Date());
 
     const finalPrice = order.completeOrder();
     expect(finalPrice).toBeCloseTo(102);
@@ -30,9 +30,9 @@ describe("Order", () => {
     address = new Address("USA", "Texas", "Some City", "Some Neighborhood", 123);
     customer = new Customer("Jane", 25, address, "789-456-1230", 987654321);
 
-    const order = new Order(cart, customer, address, new Date(), taxFactory);
+    const order = new Order(cart, customer, address, new Date());
     
     const finalPrice = order.completeOrder();
-    expect(finalPrice).toBeCloseTo(102.5);  // Assuming Texas tax rate is 1.0 in 2022
+    expect(finalPrice).toBeCloseTo(102.3);  // Assuming Texas tax rate is 1.0 in 2022
   });
 });

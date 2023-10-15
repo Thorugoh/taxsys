@@ -3,7 +3,7 @@ import { Cart } from "./Cart";
 import { Customer } from "./Customer";
 import { TaxFactory } from "./factories/TaxFactory";
 import { StateTax } from "./state/StateTax";
-import { YearTax } from "./year/YearTax";
+import { TaxManager } from "./TaxManager";
 
 export class Order {
   cart: Cart;
@@ -11,24 +11,19 @@ export class Order {
   deliveryAddress: Address;
   estimateDate: Date;
   stateTax: StateTax;
-  taxFactory: TaxFactory;
-  yearTax: YearTax;
 
-  constructor(cart: Cart, customer: Customer, deliveryAddress: Address, estimateDate: Date, taxFactory: TaxFactory) {
+  constructor(cart: Cart, customer: Customer, deliveryAddress: Address, estimateDate: Date) {
     this.cart = cart;
     this.customer = customer;
     this.deliveryAddress = deliveryAddress;
     this.estimateDate = estimateDate;
-    this.taxFactory = taxFactory;
-    this.stateTax = taxFactory.createStateTax(deliveryAddress.state);
-    this.yearTax = taxFactory.createYearTax();
+    this.stateTax = TaxManager.createStateTax(this.estimateDate.getFullYear(), this.deliveryAddress.state);
   }
 
   completeOrder(){
     const cartTotal = this.cart.getTotal();
-    const baseTax = this.yearTax.calculate(cartTotal)
     const stateTax = this.stateTax.calculate(cartTotal)
-    const finalPrice = cartTotal + baseTax + stateTax;
+    const finalPrice = cartTotal + stateTax;
 
     return finalPrice;
   }
